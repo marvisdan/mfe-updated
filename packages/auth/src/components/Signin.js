@@ -1,22 +1,14 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
+
+import { Avatar, Button, TextField, FormControlLabel, Checkbox, Grid, Box, Typography, Container } from "@mui/material"
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" to="/">
+      <Link sx={{ textDecoration: 'none', }} color="inherit" to="/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -25,38 +17,23 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  '@global': {
-    a: {
-      textDecoration: 'none',
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
 export default function SignIn({ onSignIn }) {
-  const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <Box sx={{
+        mt: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}>
+        <Avatar sx={[{
+          m: 1,
+        },
+        (theme) => ({
+          backgroundColor: theme.palette.secondary.main,
+        })]
+        }>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -64,7 +41,10 @@ export default function SignIn({ onSignIn }) {
         </Typography>
         <form
           onSubmit={(e) => e.preventDefault()}
-          className={classes.form}
+          sx={{
+            width: 1,
+            mt: 3,
+          }}
           noValidate
         >
           <TextField
@@ -98,18 +78,25 @@ export default function SignIn({ onSignIn }) {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            sx={{
+              margin: 2,
+            }}
             onClick={onSignIn}
           >
             Sign In
           </Button>
-          <Grid container>
+          <Grid container sx={{
+            mt: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
             <Grid item>
-              <Link to="/auth/signup">{"Don't have an account? Sign Up"}</Link>
+              <Link sx={{ textDecoration: 'none', }} to="/auth/signup">{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
         </form>
-      </div>
+      </Box>
       <Box mt={8}>
         <Copyright />
       </Box>
