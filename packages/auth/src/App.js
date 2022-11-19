@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Router } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Signin from "./components/Signin";
 import SignUp from "./components/Signup";
@@ -9,19 +9,19 @@ import { unstable_ClassNameGenerator as ClassNameGenerator } from '@mui/material
 
 ClassNameGenerator.configure((componentName) => `au-${componentName}`);
 
-const App = ({ history, onSignIn }) => {
+const App = ({ onSignIn }) => {
 	return (
 		<div>
-			<Router history={history}>
-				<Switch>
-					<Route path="/auth/signin">
-						<Signin onSignIn={onSignIn} />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/auth/signin" element={<Signin onSignIn={onSignIn} />}>
+
 					</Route>
-					<Route path="/auth/signup">
-						<SignUp onSignIn={onSignIn} />
+					<Route path="/auth/signup" element={<SignUp onSignIn={onSignIn} />}>
+
 					</Route>
-				</Switch>
-			</Router>
+				</Routes>
+			</BrowserRouter>
 		</div >
 	);
 };

@@ -1,32 +1,13 @@
 import React from "react";
 import { createRoot } from 'react-dom/client';
-import { createMemoryHistory, createBrowserHistory } from "history";
 import App from "./App";
 // Mount function to start up this app
 
-const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath }) => {
-	const history = defaultHistory
-		? defaultHistory
-		: createMemoryHistory({
-			initialEntries: [initialPath]
-		});
-	if (onNavigate) {
-		history.listen(onNavigate);
-	}
-
+const mount = (el,) => {
 	const root = createRoot(el)
-	root.render(<App onSignIn={onSignIn} history={history} />);
-
-	return {
-		onParentNavigate({ pathname: nextPathname }) {
-			const { pathname } = history.location;
-			if (pathname !== nextPathname) {
-				console.log(nextPathname);
-
-				history.push(nextPathname);
-			}
-		}
-	};
+	root.render(
+		<App />
+	);
 };
 // if we are in development and in isolation
 // call mount immediatly
@@ -34,7 +15,7 @@ const mount = (el, { onSignIn, onNavigate, defaultHistory, initialPath }) => {
 if (process.env.NODE_ENV === "development") {
 	const devRoot = document.querySelector("#_auth-dev-root");
 	if (devRoot) {
-		mount(devRoot, { defaultHistory: createBrowserHistory() });
+		mount(devRoot);
 	}
 }
 // We are running through the container and we should export the mount function

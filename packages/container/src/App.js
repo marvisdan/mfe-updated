@@ -26,7 +26,6 @@ export default () => {
 	const generateClassName = createGenerateClassName({
 		productionPrefix: "co"
 	});
-	createBrowserHistory;
 	return (
 		<Router history={history}>
 			<StylesProvider generateClassName={generateClassName}>
